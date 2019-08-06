@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayDemo", "PayDemo\PayDemo.csproj", "{8BF0C07F-3475-4B66-8B65-AB6A0B2F5E0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayDemo.Subprocess", "PayDemo.Subprocess\PayDemo.Subprocess.csproj", "{5A1AAF55-0588-4BD8-8B3E-F02D0AC465F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8BF0C07F-3475-4B66-8B65-AB6A0B2F5E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF0C07F-3475-4B66-8B65-AB6A0B2F5E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF0C07F-3475-4B66-8B65-AB6A0B2F5E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF0C07F-3475-4B66-8B65-AB6A0B2F5E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A1AAF55-0588-4BD8-8B3E-F02D0AC465F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1AAF55-0588-4BD8-8B3E-F02D0AC465F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1AAF55-0588-4BD8-8B3E-F02D0AC465F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1AAF55-0588-4BD8-8B3E-F02D0AC465F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

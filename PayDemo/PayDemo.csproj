@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Chromely.CefGlue.Gtk" Version="4.0.70.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PayDemo.Subprocess\PayDemo.Subprocess.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="vueapp\node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="vueapp\node_modules\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="vueapp\node_modules\**" />
+    </ItemGroup>
+
+</Project>
