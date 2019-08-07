@@ -6,23 +6,48 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Chromely.CefGlue.Gtk" Version="4.0.70.1" />
+        <PackageReference Include="Chromely.CefGlue.Gtk" Version="4.0.70.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PayDemo.Subprocess\PayDemo.Subprocess.csproj" />
+        <ProjectReference Include="..\PayDemo.Subprocess\PayDemo.Subprocess.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="vueapp\node_modules\**" />
+        <Compile Remove="vueapp\node_modules\**" />
+        <EmbeddedResource Remove="vueapp\node_modules\**" />
+        <None Remove="vueapp\node_modules\**" />
+        <Compile Remove="logs\**" />
+        <EmbeddedResource Remove="logs\**" />
+        <None Remove="logs\**" />
+        <Compile Remove="GPUCache\**" />
+        <EmbeddedResource Remove="GPUCache\**" />
+        <None Remove="GPUCache\**" />
     </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Remove="vueapp\node_modules\**" />
-    </ItemGroup>
+    <Target Name="ValidateBuildToolsAndDir" BeforeTargets="Build">
+        <Message Importance="high" Text="检查Node.js是否安装..." />
+        <Exec Command="node --version" ContinueOnError="false">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+        <Error Condition="'$(ErrorCode)' != '0'" Text="要构建和运行本项目必须安装 Node.js. 请从 https://nodejs.org/ 安装 Node.js并重启你的终端或IDE." />
+        <Message Condition="'$(ErrorCode)' == '0'" Importance="High" Text="Node.js 已安装!" />
 
-    <ItemGroup>
-      <None Remove="vueapp\node_modules\**" />
-    </ItemGroup>
+        <Message Importance="High" Text="检查 node_modules 文件夹是否存在..." />
+        <Message Importance="High" Text="node_modules 未找到! 运行 npm install. (这可能需要一些时间)" Condition="!Exists('$(ProjectDir)app\node_modules')" />
+        <Exec Command="npm install --silent" Condition="!Exists('$(ProjectDir)vueapp\node_modules')" WorkingDirectory="vueapp" ContinueOnError="false" />
+    </Target>
+
+    <Target Name="DebugVueDemo" BeforeTargets="Build" Condition=" '$(Configuration)'=='Debug' ">
+        <Message Importance="high" Text="Vue 程序构建中..." />
+        <Exec Command="npm run build" WorkingDirectory="vueapp" ContinueOnError="false" ConsoleToMSBuild="false">
+            <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+        </Exec>
+
+        <Message Importance="high" Text="正在复制Vue到调试目录..." />
+        <Exec Condition="'$(OS)' == 'Unix'" Command="rm -rf &quot;$(TargetDir)dist&quot;" />
+        <Exec Condition="'$(OS)' == 'Unix'" Command="cp -r &quot;$(ProjectDir)dist&quot; &quot;$(TargetDir)dist&quot; " />
+        <Exec Condition="'$(OS)' == 'Windows_NT'" Command="xcopy &quot;$(ProjectDir)dist&quot; &quot;$(TargetDir)dist&quot;   /i /s /r /y /c" />
+    </Target>
 
 </Project>
